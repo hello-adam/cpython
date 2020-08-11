@@ -28,7 +28,8 @@ steps:
     --source "{1}"
     --build "{0}\bin\amd64"
     --arch "amd64"
-    --temp "{0}\layout-temp"'
+    --temp "{0}\layout-temp"
+    --include-cat "{0}\bin\amd64\python.cat"'
     -f ("$(Build.BinariesDirectory)", "$(Build.SourcesDirectory)")
     )
 
