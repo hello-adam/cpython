@@ -1,17 +1,18 @@
 parameters:
-    buildDir: $(Build.ArtifactStagingDirectory)
+  buildDir: $(Build.ArtifactStagingDirectory)
 
-- script: |
-    rm -rf ${{ parameters.buildDir }}/share
-    rm -rf ${{ parameters.buildDir }}/bin/2to3*
-    rm -rf ${{ parameters.buildDir }}/bin/idle3*
-    rm -rf ${{ parameters.buildDir }}/lib/python3.8/config-3.8-*
-    rm -rf ${{ parameters.buildDir }}/lib/python3.8/idlelib
-    rm -rf ${{ parameters.buildDir }}/lib/python3.8/lib2to3
-    rm -rf ${{ parameters.buildDir }}/lib/python3.8/pydoc_data
-    rm -rf ${{ parameters.buildDir }}/lib/python3.8/idlelib
-    rm -rf ${{ parameters.buildDir }}/lib/python3.8/test
-    rm -rf ${{ parameters.buildDir }}/lib/python3.8/tkinter
-    rm -f ${{ parameters.buildDir }}/lib/libpython3.8.so
-    ln -s ${{ parameters.buildDir }}/lib/libpython3.8.so.1.0 ${{ parameters.buildDir }}/lib/libpython3.8.so
-  displayName: 'Clean up installation'
+steps:
+  - script: |
+      rm -rf ${{ parameters.buildDir }}/share
+      rm -rf ${{ parameters.buildDir }}/bin/2to3*
+      rm -rf ${{ parameters.buildDir }}/bin/idle3*
+      rm -rf ${{ parameters.buildDir }}/lib/python3.8/config-3.8-*
+      rm -rf ${{ parameters.buildDir }}/lib/python3.8/idlelib
+      rm -rf ${{ parameters.buildDir }}/lib/python3.8/lib2to3
+      rm -rf ${{ parameters.buildDir }}/lib/python3.8/pydoc_data
+      rm -rf ${{ parameters.buildDir }}/lib/python3.8/idlelib
+      rm -rf ${{ parameters.buildDir }}/lib/python3.8/test
+      rm -rf ${{ parameters.buildDir }}/lib/python3.8/tkinter
+      rm -f ${{ parameters.buildDir }}/lib/libpython3.8.so
+      ln -s ${{ parameters.buildDir }}/lib/libpython3.8.so.1.0 ${{ parameters.buildDir }}/lib/libpython3.8.so
+    displayName: 'Clean up installation'
