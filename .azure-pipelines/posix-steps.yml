@@ -12,13 +12,16 @@ steps:
   displayName: 'Install dependencies'
 
 - script: ./configure  --enable-optimizations --enable-shared --with-pymalloc --prefix=$(Build.ArtifactStagingDirectory)
-  displayName: 'Configure CPython (debug)'
+  displayName: 'Configure CPython'
 
 - script: make -j4
   displayName: 'Build CPython'
 
 - script: make pythoninfo
   displayName: 'Display build info'
+
+- script: make install
+  displayName: 'Install into staging directory'
 
 - task: PublishBuildArtifacts@1
   inputs:

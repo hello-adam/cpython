@@ -11,7 +11,7 @@ steps:
     Write-Host '##vso[task.setvariable variable=EXTERNALS_DIR]$(Build.BinariesDirectory)\externals'
   displayName: Update build locations
 
-- script: PCbuild\build.bat -v -E -p x64
+- script: PCbuild\build.bat -v -e -p x64
   displayName: 'Build CPython'
   env:
     IncludeUwp: true

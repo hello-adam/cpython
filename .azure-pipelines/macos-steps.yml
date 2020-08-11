@@ -12,6 +12,9 @@ steps:
 - script: make pythoninfo
   displayName: 'Display build info'
 
+- script: make install
+  displayName: 'Install into staging directory'
+
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: $(Build.ArtifactStagingDirectory)
