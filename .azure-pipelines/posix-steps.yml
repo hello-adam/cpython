@@ -23,14 +23,9 @@ steps:
 - script: make install
   displayName: 'Install into staging directory'
 
-- script: |
-    rm -rf $(Build.ArtifactStagingDirectory)/lib/python3.8/config-3.8-*
-    rm -rf $(Build.ArtifactStagingDirectory)/lib/python3.8/idlelib
-    rm -rf $(Build.ArtifactStagingDirectory)/lib/python3.8/lib2to3
-    rm -rf $(Build.ArtifactStagingDirectory)/lib/python3.8/pydoc_data
-    rm -rf $(Build.ArtifactStagingDirectory)/lib/python3.8/idlelib
-    rm -rf $(Build.ArtifactStagingDirectory)/lib/python3.8/test
-    rm -rf $(Build.ArtifactStagingDirectory)/lib/python3.8/tkinter
+- template: ./clean-up-build.yml
+  parameters:
+    buildDir: $(Build.ArtifactStagingDirectory)
   displayName: 'Clean up installation'
 
 - task: PublishBuildArtifacts@1
