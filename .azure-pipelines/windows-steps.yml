@@ -20,25 +20,25 @@ steps:
   displayName: 'Display build info'
 
 - powershell: >
-  Write-Host (
-  '##vso[task.setvariable variable=LayoutCmd]&
-  "python"
-  "{1}\PC\layout"
-  -vv
-  --source "{1}"
-  --build "{0}\bin"
-  --arch "$(Name)"
-  --temp "{0}\layout-temp"
-  --include-cat "{0}\bin\python.cat"
-  --doc-build "{0}\doc"'
-  -f ("$(Build.BinariesDirectory)", "$(Build.SourcesDirectory)")
-  )
+    Write-Host (
+    '##vso[task.setvariable variable=LayoutCmd]&
+    "python"
+    "{1}\PC\layout"
+    -vv
+    --source "{1}"
+    --build "{0}\bin"
+    --arch "$(Name)"
+    --temp "{0}\layout-temp"
+    --include-cat "{0}\bin\python.cat"
+    --doc-build "{0}\doc"'
+    -f ("$(Build.BinariesDirectory)", "$(Build.SourcesDirectory)")
+    )
 
 - powershell: >
-  $(LayoutCmd)
-  --copy "$(Build.ArtifactStagingDirectory)\layout"
-  --zip "$(Build.ArtifactStagingDirectory)\embed\python-embed-win64.zip"
-  --preset-embed
+    $(LayoutCmd)
+    --copy "$(Build.ArtifactStagingDirectory)\layout"
+    --zip "$(Build.ArtifactStagingDirectory)\embed\python-embed-win64.zip"
+    --preset-embed
 displayName: 'Generate embeddable layout'
 
 - task: PublishPipelineArtifact@0
