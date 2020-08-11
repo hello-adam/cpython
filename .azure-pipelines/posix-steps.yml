@@ -26,7 +26,6 @@ steps:
 - template: ./clean-up-build.yml
   parameters:
     buildDir: $(Build.ArtifactStagingDirectory)
-  displayName: 'Clean up installation'
 
 - task: PublishBuildArtifacts@1
   inputs:

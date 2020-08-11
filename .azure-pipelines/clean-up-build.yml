@@ -14,3 +14,4 @@ parameters:
     rm -rf ${{ parameters.buildDir }}/lib/python3.8/tkinter
     rm -f ${{ parameters.buildDir }}/lib/libpython3.8.so
     ln -s ${{ parameters.buildDir }}/lib/libpython3.8.so.1.0 ${{ parameters.buildDir }}/lib/libpython3.8.so
+  displayName: 'Clean up installation'
