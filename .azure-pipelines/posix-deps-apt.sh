@@ -10,13 +10,11 @@ apt-get -yq install \
     libsqlite3-dev \
     libssl-dev \
     libgdbm-dev \
-    tk-dev \
     lzma \
     lzma-dev \
     liblzma-dev \
     libffi-dev \
-    uuid-dev \
-    xvfb
+    uuid-dev
 
 if [ ! -z "$1" ]
 then

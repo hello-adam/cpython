@@ -7,31 +7,48 @@ steps:
     # Relocate build outputs outside of source directory to make cleaning faster
     Write-Host '##vso[task.setvariable variable=Py_IntDir]$(Build.BinariesDirectory)\obj'
     # UNDONE: Do not build to a different directory because of broken tests
-    Write-Host '##vso[task.setvariable variable=Py_OutDir]$(Build.SourcesDirectory)\PCbuild'
-    #Write-Host '##vso[task.setvariable variable=Py_OutDir]$(Build.BinariesDirectory)\bin'
+    Write-Host '##vso[task.setvariable variable=Py_OutDir]$(Build.BinariesDirectory)\bin'
     Write-Host '##vso[task.setvariable variable=EXTERNALS_DIR]$(Build.BinariesDirectory)\externals'
   displayName: Update build locations
 
-- script: PCbuild\build.bat -e $(buildOpt)
+- script: PCbuild\build.bat -v -E -p x64
   displayName: 'Build CPython'
   env:
     IncludeUwp: true
 
 - script: python.bat -m test.pythoninfo
   displayName: 'Display build info'
-  condition: and(succeeded(), variables['testRunPlatform'])
 
-- script: PCbuild\rt.bat -q -uall -u-cpu -rwW --slowest --timeout=1200 -j0 --junit-xml="$(Build.BinariesDirectory)\test-results.xml" --tempdir="$(Build.BinariesDirectory)\test"
-  displayName: 'Tests'
-  condition: and(succeeded(), variables['testRunPlatform'])
-  env:
-    PREFIX: $(Py_OutDir)\$(arch)
+- powershell: >
+  Write-Host (
+  '##vso[task.setvariable variable=LayoutCmd]&
+  "python"
+  "{1}\PC\layout"
+  -vv
+  --source "{1}"
+  --build "{0}\bin"
+  --arch "$(Name)"
+  --temp "{0}\layout-temp"
+  --include-cat "{0}\bin\python.cat"
+  --doc-build "{0}\doc"'
+  -f ("$(Build.BinariesDirectory)", "$(Build.SourcesDirectory)")
+  )
 
-- task: PublishTestResults@2
-  displayName: 'Publish Test Results'
+- powershell: >
+  $(LayoutCmd)
+  --copy "$(Build.ArtifactStagingDirectory)\layout"
+  --zip "$(Build.ArtifactStagingDirectory)\embed\python-embed-win64.zip"
+  --preset-embed
+displayName: 'Generate embeddable layout'
+
+- task: PublishPipelineArtifact@0
+  displayName: 'Publish Artifact: layout_embed_win64'
   inputs:
-    testResultsFiles: '$(Build.BinariesDirectory)\test-results.xml'
-    mergeTestResults: true
-    testRunTitle: $(testRunTitle)
-    platform: $(testRunPlatform)
-  condition: and(succeededOrFailed(), variables['testRunPlatform'])
+    targetPath: '$(Build.ArtifactStagingDirectory)\layout'
+    artifactName: layout_embed_win64
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: embed_win64'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\embed'
+    ArtifactName: embed_win64
