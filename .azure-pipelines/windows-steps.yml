@@ -27,7 +27,7 @@ steps:
     -vv
     --source "{1}"
     --build "{0}\bin"
-    --arch "$(Name)"
+    --arch "amd64"
     --temp "{0}\layout-temp"
     --include-cat "{0}\bin\python.cat"
     --doc-build "{0}\doc"'
