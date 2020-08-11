@@ -32,6 +32,11 @@ steps:
     -f ("$(Build.BinariesDirectory)", "$(Build.SourcesDirectory)")
     )
 
+- powershell: |
+    $d = (.\PCbuild\build.bat -V) | %{ if($_ -match '\s+(\w+):\s*(.+)\s*$') { @{$Matches[1] = $Matches[2];} }};
+    Write-Host "##vso[task.setvariable variable=VersionText]$($d.PythonVersion)"
+  displayName: 'Extract version numbers'
+
 - powershell: >
     $(LayoutCmd)
     --copy "$(Build.ArtifactStagingDirectory)\layout"

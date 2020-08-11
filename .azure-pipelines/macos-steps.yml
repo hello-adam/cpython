@@ -3,7 +3,7 @@ steps:
   clean: true
   fetchDepth: 5
 
-- script: ./configure --enable-shared --enable-framework --with-pymalloc --without-doc-strings --with-openssl=/usr/local/opt/openssl --prefix=$(Build.ArtifactStagingDirectory)
+- script: ./configure --enable-framework --with-pymalloc --without-doc-strings --with-openssl=/usr/local/opt/openssl --prefix=$(Build.ArtifactStagingDirectory)
   displayName: 'Configure CPython'
 
 - script: make -j4
