@@ -3,7 +3,7 @@ steps:
   clean: true
   fetchDepth: 5
 
-- script: ./configure --enable-optimizations --enable-shared --with-pymalloc --with-openssl=/usr/local/opt/openssl --prefix=$(Build.ArtifactStagingDirectory)
+- script: ./configure --enable-shared --enable-framework --with-pymalloc --without-doc-strings --with-openssl=/usr/local/opt/openssl --prefix=$(Build.ArtifactStagingDirectory)
   displayName: 'Configure CPython'
 
 - script: make -j4
@@ -14,6 +14,16 @@ steps:
 
 - script: make install
   displayName: 'Install into staging directory'
+
+- script: |
+    rm -rf $(Build.ArtifactStagingDirectory)/lib/python3.8/config-3.8-*
+    rm -rf $(Build.ArtifactStagingDirectory)/lib/python3.8/idlelib
+    rm -rf $(Build.ArtifactStagingDirectory)/lib/python3.8/lib2to3
+    rm -rf $(Build.ArtifactStagingDirectory)/lib/python3.8/pydoc_data
+    rm -rf $(Build.ArtifactStagingDirectory)/lib/python3.8/idlelib
+    rm -rf $(Build.ArtifactStagingDirectory)/lib/python3.8/test
+    rm -rf $(Build.ArtifactStagingDirectory)/lib/python3.8/tkinter
+  displayName: 'Clean up installation'
 
 - task: PublishBuildArtifacts@1
   inputs:
