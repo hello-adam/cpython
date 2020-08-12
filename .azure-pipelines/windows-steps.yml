@@ -9,8 +9,6 @@ steps:
     Write-Host "##vso[task.setvariable variable=VersionNumber]$($d.PythonVersionNumber)"
     Write-Host "##vso[task.setvariable variable=VersionHex]$($d.PythonVersionHex)"
     Write-Host "##vso[task.setvariable variable=VersionUnique]$($d.PythonVersionUnique)"
-    Write-Host "##vso[build.addbuildtag]$($d.PythonVersion)"
-    Write-Host "##vso[build.addbuildtag]$($d.PythonVersion)-$(Name)"
   displayName: 'Extract version numbers'
 
 - powershell: |
