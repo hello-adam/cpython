@@ -32,19 +32,6 @@ steps:
 - script: python.bat -m test.pythoninfo
   displayName: 'Display build info'
 
-- powershell: |
-    $env:SigningCertificate = $null
-    python PC\layout -vv -b "$(Build.BinariesDirectory)\bin" -t "$(Build.BinariesDirectory)\catalog" --catalog "${env:CAT}.cdf" --preset-default --arch amd64
-    makecat "${env:CAT}.cdf"
-    del "${env:CAT}.cdf"
-    if (-not (Test-Path "${env:CAT}.cat")) {
-      throw "Failed to build catalog file"
-    }
-  displayName: 'Generate catalog'
-  env:
-    CAT: $(Build.BinariesDirectory)\bin\amd64\python
-    PYTHON_HEXVERSION: $(VersionHex)
-
 - powershell: >
     Write-Host (
     '##vso[task.setvariable variable=LayoutCmd]&
@@ -54,8 +41,7 @@ steps:
     --source "{1}"
     --build "{0}\bin\amd64"
     --arch "amd64"
-    --temp "{0}\layout-temp"
-    --include-cat "{0}\bin\amd64\python.cat"'
+    --temp "{0}\layout-temp"'
     -f ("$(Build.BinariesDirectory)", "$(Build.SourcesDirectory)")
     )
   displayName: 'Prepare layout command'
