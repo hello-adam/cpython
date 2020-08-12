@@ -35,7 +35,7 @@ steps:
 - powershell: >
     Write-Host (
     '##vso[task.setvariable variable=LayoutCmd]&
-    "{0}\python.exe"
+    "{0}\bin\amd64\python.exe"
     "{1}\PC\layout"
     -vv
     --source "{1}"
