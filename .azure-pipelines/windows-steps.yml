@@ -53,8 +53,7 @@ steps:
 
 - powershell: >
     $(LayoutCmd)
-    --copy "$(Build.ArtifactStagingDirectory)\lib"
-    --zip "$(Build.ArtifactStagingDirectory)\embed\python-embed-win64.zip"
+    --copy "$(Build.ArtifactStagingDirectory)\bin"
     --preset-embed
   displayName: 'Generate embeddable layout'
 
