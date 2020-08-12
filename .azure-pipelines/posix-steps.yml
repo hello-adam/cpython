@@ -26,6 +26,7 @@ steps:
 - template: ./clean-up-build.yml
   parameters:
     buildDir: $(Build.ArtifactStagingDirectory)
+    linkFix: true
 
 - task: PublishBuildArtifacts@1
   inputs:

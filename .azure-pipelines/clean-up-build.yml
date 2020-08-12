@@ -1,5 +1,7 @@
 parameters:
   buildDir: $(Build.ArtifactStagingDirectory)
+  linkFix: false
+
 
 steps:
   - script: |
@@ -13,6 +15,9 @@ steps:
       rm -rf ${{ parameters.buildDir }}/lib/python3.8/idlelib
       rm -rf ${{ parameters.buildDir }}/lib/python3.8/test
       rm -rf ${{ parameters.buildDir }}/lib/python3.8/tkinter
+    displayName: 'Clean up installation'
+
+  - script: |
       rm -f ${{ parameters.buildDir }}/lib/libpython3.8.so
       ln -s ${{ parameters.buildDir }}/lib/libpython3.8.so.1.0 ${{ parameters.buildDir }}/lib/libpython3.8.so
-    displayName: 'Clean up installation'
+    condition: and(succeeded(), eq('${{ parameters.linkFix }}', true))
