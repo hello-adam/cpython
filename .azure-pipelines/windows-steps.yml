@@ -34,7 +34,7 @@ steps:
 
 - powershell: |
     $env:SigningCertificate = $null
-    $(_HostPython) PC\layout -vv -b "$(Build.BinariesDirectory)\bin" -t "$(Build.BinariesDirectory)\catalog" --catalog "${env:CAT}.cdf" --preset-default --arch amd64
+    python PC\layout -vv -b "$(Build.BinariesDirectory)\bin" -t "$(Build.BinariesDirectory)\catalog" --catalog "${env:CAT}.cdf" --preset-default --arch amd64
     makecat "${env:CAT}.cdf"
     del "${env:CAT}.cdf"
     if (-not (Test-Path "${env:CAT}.cat")) {
