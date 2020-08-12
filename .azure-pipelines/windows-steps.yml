@@ -58,7 +58,7 @@ steps:
   displayName: 'Generate embeddable layout'
 
 - task: PublishPipelineArtifact@0
-  displayName: 'Publish Artifact: python_win64_2019'
+  displayName: 'Publish Artifact'
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)'
-    artifactName: layout_embed_win64
+    artifactName: python_win64_2019
