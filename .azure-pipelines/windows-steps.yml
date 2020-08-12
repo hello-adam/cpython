@@ -3,6 +3,11 @@ steps:
   clean: false
   fetchDepth: 5
 
+- script: |
+    cp -rv .\Include $(Build.ArtifactStagingDirectory)\include
+    rm -rfv $(Build.ArtifactStagingDirectory)\include\internal
+  displayName: 'Stage public include files for publishing'
+
 - powershell: |
     $d = (.\PCbuild\build.bat -V) | %{ if($_ -match '\s+(\w+):\s*(.+)\s*$') { @{$Matches[1] = $Matches[2];} }};
     Write-Host "##vso[task.setvariable variable=VersionText]$($d.PythonVersion)"
@@ -48,19 +53,13 @@ steps:
 
 - powershell: >
     $(LayoutCmd)
-    --copy "$(Build.ArtifactStagingDirectory)\layout"
+    --copy "$(Build.ArtifactStagingDirectory)\lib"
     --zip "$(Build.ArtifactStagingDirectory)\embed\python-embed-win64.zip"
     --preset-embed
   displayName: 'Generate embeddable layout'
 
 - task: PublishPipelineArtifact@0
-  displayName: 'Publish Artifact: layout_embed_win64'
+  displayName: 'Publish Artifact: python_win64_2019'
   inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)\layout'
+    targetPath: '$(Build.ArtifactStagingDirectory)'
     artifactName: layout_embed_win64
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: embed_win64'
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)\embed'
-    ArtifactName: embed_win64
