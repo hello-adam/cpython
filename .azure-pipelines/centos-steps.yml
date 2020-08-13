@@ -3,7 +3,7 @@ steps:
   clean: true
   fetchDepth: 5
 
-- script: sudo ./.azure-pipelines/posix-deps-yum.sh
+- script: ./.azure-pipelines/posix-deps-yum.sh
   displayName: 'Install dependencies'
 
 - script: ./configure  --enable-shared --enable-optimizations --with-pymalloc --without-doc-strings --prefix=$(Build.ArtifactStagingDirectory)
