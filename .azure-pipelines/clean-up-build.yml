@@ -17,10 +17,10 @@ steps:
       rm -rfv ${{ parameters.buildDir }}/lib/python3.8/idlelib
       rm -rfv ${{ parameters.buildDir }}/lib/python3.8/tkinter
       rm -rfv ${{ parameters.buildDir }}/lib/python3.8/turtle*
-      find ${{ parameters.buildDir }}/lib/python3.8 -name __pycache__ -type d -delete
-      find ${{ parameters.buildDir }}/lib/python3.8 -name test -type d -delete
-      find ${{ parameters.buildDir }}/lib/python3.8 -name tests -type d -delete
+      find ${{ parameters.buildDir }}/lib/python3.8 -name __pycache__ -type d -prune -exec rm -rfv {} \;
+      find ${{ parameters.buildDir }}/lib/python3.8 -name test -type d -prune -exec rm -rfv {} \;
+      find ${{ parameters.buildDir }}/lib/python3.8 -name tests -type d -prune -exec rm -rfv {} \;
       export LD_LIBRARY_PATH=${{ parameters.buildDir }}/lib
       find ${{ parameters.buildDir }}/lib/python3.8 -name "*.py" -type f -exec ${{ parameters.buildDir }}/bin/python3 -OO -m compileall -b {} \; -delete
-      find ${{ parameters.buildDir }}/lib/python3.8 -name __pycache__ -type d -delete
+      find ${{ parameters.buildDir }}/lib/python3.8 -name __pycache__ -type d -prune -exec rm -rfv {} \;
     displayName: 'Clean up installation'
