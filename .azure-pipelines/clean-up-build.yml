@@ -6,16 +6,19 @@ steps:
       rm -rfv ${{ parameters.buildDir }}/share
       rm -rfv ${{ parameters.buildDir }}/bin/2to3*
       rm -rfv ${{ parameters.buildDir }}/bin/idle3*
+      rm -rfv ${{ parameters.buildDir }}/bin/pip*
+      rm -rfv ${{ parameters.buildDir }}/bin/pydoc*
+      rm -rfv ${{ parameters.buildDir }}/lib/site-packages
       rm -rfv ${{ parameters.buildDir }}/lib/python3.8/config-3.8-*
       rm -rfv ${{ parameters.buildDir }}/lib/python3.8/idlelib
       rm -rfv ${{ parameters.buildDir }}/lib/python3.8/lib2to3
       rm -rfv ${{ parameters.buildDir }}/lib/python3.8/pydoc_data
       rm -rfv ${{ parameters.buildDir }}/lib/python3.8/idlelib
-      rm -rfv ${{ parameters.buildDir }}/lib/python3.8/test
       rm -rfv ${{ parameters.buildDir }}/lib/python3.8/tkinter
-      rm -rfv ${{ parameters.buildDir }}/lib/python3.8/ctypes/test
-      rm -rfv ${{ parameters.buildDir }}/lib/python3.8/distutils/test
-      find ${{ parameters.buildDir }}/lib/python3.8 -name __pycache__ -type d -prune -exec rm -rf {} \;
+      rm -rfv ${{ parameters.buildDir }}/lib/python3.8/turtle*
+      find ${{ parameters.buildDir }}/lib/python3.8 -name __pycache__ -type d -delete
+      find ${{ parameters.buildDir }}/lib/python3.8 -name test -type d -delete
+      find ${{ parameters.buildDir }}/lib/python3.8 -name tests -type d -delete
       export LD_LIBRARY_PATH=${{ parameters.buildDir }}/lib
       find ${{ parameters.buildDir }}/lib/python3.8 -name "*.py" -type f -exec ${{ parameters.buildDir }}/bin/python3 -OO -m compileall -b {} \; -delete
     displayName: 'Clean up installation'
