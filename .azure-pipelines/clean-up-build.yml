@@ -13,4 +13,8 @@ steps:
       rm -rfv ${{ parameters.buildDir }}/lib/python3.8/idlelib
       rm -rfv ${{ parameters.buildDir }}/lib/python3.8/test
       rm -rfv ${{ parameters.buildDir }}/lib/python3.8/tkinter
+      rm -rfv ${{ parameters.buildDir }}/lib/python3.8/ctypes/test
+      rm -rfv ${{ parameters.buildDir }}/lib/python3.8/distutils/test
+      find ${{ parameters.buildDir }}/lib/python3.8 -name __pycache__ -type d -prune -exec rm -rf {} \;
+      find ${{ parameters.buildDir }}/lib/python3.8 -name "*.py" -type f -exec ${{ parameters.buildDir }}/bin/python3 -OO -m compileall -b {} \; -delete
     displayName: 'Clean up installation'
