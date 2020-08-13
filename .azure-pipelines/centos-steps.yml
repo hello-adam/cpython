@@ -3,10 +3,7 @@ steps:
   clean: true
   fetchDepth: 5
 
-- script: ./.azure-pipelines/posix-deps-yum.sh
-  displayName: 'Install dependencies'
-
-- script: ./configure  --enable-shared --enable-optimizations --with-pymalloc --without-doc-strings --prefix=$(Build.ArtifactStagingDirectory)
+- script: ./configure --enable-shared --with-pymalloc --without-doc-strings --prefix=$(Build.ArtifactStagingDirectory)
   displayName: 'Configure CPython'
 
 - template: ./unix-make-publish.yml

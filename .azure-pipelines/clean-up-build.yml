@@ -23,4 +23,7 @@ steps:
       export LD_LIBRARY_PATH=${{ parameters.buildDir }}/lib
       find ${{ parameters.buildDir }}/lib/python3.8 -name "*.py" -type f -exec ${{ parameters.buildDir }}/bin/python3 -OO -m compileall -b {} \; -delete
       find ${{ parameters.buildDir }}/lib/python3.8 -name __pycache__ -type d -prune -exec rm -rfv {} \;
+      find ${{ parameters.buildDir }}/lib -name libpython3.8.so -type f -maxdepth 1 -exec rm -vf {} \; -exec ln -sv {}.1.0 {} \;
+
     displayName: 'Clean up installation'
+
