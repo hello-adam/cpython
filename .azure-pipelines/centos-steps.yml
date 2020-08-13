@@ -1,0 +1,11 @@
+steps:
+- checkout: self
+  clean: true
+  fetchDepth: 5
+
+- script: ./configure  --enable-shared --with-pymalloc --without-doc-strings --prefix=$(Build.ArtifactStagingDirectory)
+  displayName: 'Configure CPython'
+
+- template: ./unix-make-publish.yml
+  parameters:
+    artifactName: python_centos_74

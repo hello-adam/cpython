@@ -19,10 +19,6 @@ jobs:
   dependsOn: Prebuild
   condition: and(succeeded(), eq(dependencies.Prebuild.outputs['tests.run'], 'true'))
 
-  variables:
-    testRunTitle: '$(build.sourceBranchName)-macos'
-    testRunPlatform: macos
-
   pool:
     vmImage: macos-10.14
 
@@ -44,9 +40,20 @@ jobs:
     openssl_version: 1.1.1g
 
   steps:
-  - template: ./posix-steps.yml
-    parameters:
-      dependencies: apt
+  - template: ./ubuntu-steps.yml
+
+
+- job: CentOS_Build
+  displayName: CentOS Build
+  dependsOn: Prebuild
+  condition: and(succeeded(), eq(dependencies.Prebuild.outputs['tests.run'], 'true'))
+
+  pool:
+    vmImage: 'ubuntu-18.04'
+  container: helloadam/hobbitscentosbuilder:latest
+
+  steps:
+    - template: ./centos-steps.yml
 
 
 - job: Windows_Build
@@ -56,11 +63,6 @@ jobs:
 
   pool:
     vmImage: windows-2019
-
-  variables:
-    arch: amd64
-    testRunTitle: '$(Build.SourceBranchName)-win64'
-    testRunPlatform: win64
 
   steps:
   - template: ./windows-steps.yml

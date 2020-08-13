@@ -6,20 +6,6 @@ steps:
 - script: ./configure --enable-shared --with-pymalloc --without-doc-strings --with-openssl=/usr/local/opt/openssl --prefix=$(Build.ArtifactStagingDirectory)
   displayName: 'Configure CPython'
 
-- script: make -j4
-  displayName: 'Build CPython'
-
-- script: make pythoninfo
-  displayName: 'Display build info'
-
-- script: make install
-  displayName: 'Install into staging directory'
-
-- template: ./clean-up-build.yml
+- template: ./unix-make-publish.yml
   parameters:
-    buildDir: $(Build.ArtifactStagingDirectory)
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: $(Build.ArtifactStagingDirectory)
     artifactName: python_macos_1014

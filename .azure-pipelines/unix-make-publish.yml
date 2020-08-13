@@ -1,0 +1,23 @@
+parameters:
+  artifactName: python_unix
+
+steps:
+- script: make -j4
+  displayName: 'Build CPython'
+
+- script: make pythoninfo
+  displayName: 'Display build info'
+
+- script: make install
+  displayName: 'Install into staging directory'
+
+- template: ./clean-up-build.yml
+  parameters:
+    buildDir: $(Build.ArtifactStagingDirectory)
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: $(artifactName)
+
+
