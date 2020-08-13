@@ -61,4 +61,4 @@ steps:
   displayName: 'Publish Artifact'
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)'
-    artifactName: python_win64_2019
+    artifactName: python_windows_2019
