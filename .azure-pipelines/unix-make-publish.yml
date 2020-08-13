@@ -15,6 +15,12 @@ steps:
   parameters:
     buildDir: $(Build.ArtifactStagingDirectory)
 
+- script: |
+    cd $(Build.ArtifactStagingDirectory)
+    tar cvzf ${{ parameters.artifactName }}.tgz bin lib include
+    rm -rfv bin lib include
+  displayName: 'tar up to preserve links'
+
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: $(Build.ArtifactStagingDirectory)
