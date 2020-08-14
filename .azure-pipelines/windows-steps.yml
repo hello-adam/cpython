@@ -57,8 +57,8 @@ steps:
     --preset-embed
   displayName: 'Generate embeddable layout'
 
-- task: PublishPipelineArtifact@0
+- task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)'
+    pathToPublish: $(Build.ArtifactStagingDirectory)
     artifactName: python_windows_2019
