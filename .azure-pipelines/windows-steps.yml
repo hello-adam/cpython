@@ -5,7 +5,7 @@ steps:
 
 - script: |
     cp -rv .\Include $(Build.ArtifactStagingDirectory)\include
-    cp -v .\PC\*.h $(Build.ArtifactStagingDirectory)\include\
+    cp -v .\PC\\*.h $(Build.ArtifactStagingDirectory)\include\
     rm -rfv $(Build.ArtifactStagingDirectory)\include\internal
   displayName: 'Stage public include files for publishing'
 
