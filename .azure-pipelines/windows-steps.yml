@@ -5,7 +5,9 @@ steps:
 
 - script: |
     cp -rv .\Include $(Build.ArtifactStagingDirectory)\include
-    cp -v .\PC\\*.h $(Build.ArtifactStagingDirectory)\include\
+    cp -v .\PC\pyconfig.h $(Build.ArtifactStagingDirectory)\include\
+    cp -v .\PC\python_ver_rc.h $(Build.ArtifactStagingDirectory)\include\
+    cp -v .\PC\errmap.h $(Build.ArtifactStagingDirectory)\include\
     rm -rfv $(Build.ArtifactStagingDirectory)\include\internal
   displayName: 'Stage public include files for publishing'
 
