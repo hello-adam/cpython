@@ -58,6 +58,7 @@ steps:
     $(LayoutCmd)
     --copy "$(Build.ArtifactStagingDirectory)\bin"
     --preset-embed
+    --include-pip
   displayName: 'Generate embeddable layout'
 
 - script: |
