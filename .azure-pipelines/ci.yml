@@ -1,7 +1,7 @@
 variables:
   coverage: false
 
-trigger: ['master', '3.9', '3.8', '3.7']
+trigger: ['hobbits-python']
 
 jobs:
 - job: Prebuild

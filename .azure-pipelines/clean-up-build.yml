@@ -6,13 +6,9 @@ steps:
       rm -rfv ${{ parameters.buildDir }}/share
       rm -rfv ${{ parameters.buildDir }}/bin/2to3*
       rm -rfv ${{ parameters.buildDir }}/bin/idle3*
-      rm -rfv ${{ parameters.buildDir }}/bin/pip*
       rm -rfv ${{ parameters.buildDir }}/bin/pydoc*
       rm -rfv ${{ parameters.buildDir }}/bin/easy_install*
-      rm -rfv ${{ parameters.buildDir }}/lib/python3.8/site-packages/pip*
       rm -rfv ${{ parameters.buildDir }}/lib/python3.8/site-packages/easy_install*
-      rm -rfv ${{ parameters.buildDir }}/lib/python3.8/site-packages/setuptools*
-      rm -rfv ${{ parameters.buildDir }}/lib/python3.8/ensurepip
       rm -rfv ${{ parameters.buildDir }}/lib/python3.8/config-3.8-*
       rm -rfv ${{ parameters.buildDir }}/lib/python3.8/idlelib
       rm -rfv ${{ parameters.buildDir }}/lib/python3.8/lib2to3
