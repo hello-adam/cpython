@@ -296,7 +296,7 @@ Unicode Character Database as included in the :mod:`unicodedata` module.
 
 Identifiers are unlimited in length.  Case is significant.
 
-.. productionlist::
+.. productionlist:: python-grammar
    identifier: `xid_start` `xid_continue`*
    id_start: <all characters in general categories Lu, Ll, Lt, Lm, Lo, Nl, the underscore, and characters with the Other_ID_Start property>
    id_continue: <all characters in `id_start`, plus characters in the categories Mn, Mc, Nd, Pc and others with the Other_ID_Continue property>
@@ -316,7 +316,7 @@ The Unicode category codes mentioned above stand for:
 * *Nd* - decimal numbers
 * *Pc* - connector punctuations
 * *Other_ID_Start* - explicit list of characters in `PropList.txt
-  <http://www.unicode.org/Public/12.1.0/ucd/PropList.txt>`_ to support backwards
+  <https://www.unicode.org/Public/13.0.0/ucd/PropList.txt>`_ to support backwards
   compatibility
 * *Other_ID_Continue* - likewise
 
@@ -412,7 +412,7 @@ String and Bytes literals
 
 String literals are described by the following lexical definitions:
 
-.. productionlist::
+.. productionlist:: python-grammar
    stringliteral: [`stringprefix`](`shortstring` | `longstring`)
    stringprefix: "r" | "u" | "R" | "U" | "f" | "F"
                : | "fr" | "Fr" | "fR" | "FR" | "rf" | "rF" | "Rf" | "RF"
@@ -424,7 +424,7 @@ String literals are described by the following lexical definitions:
    longstringchar: <any source character except "\">
    stringescapeseq: "\" <any source character>
 
-.. productionlist::
+.. productionlist:: python-grammar
    bytesliteral: `bytesprefix`(`shortbytes` | `longbytes`)
    bytesprefix: "b" | "B" | "br" | "Br" | "bR" | "BR" | "rb" | "rB" | "Rb" | "RB"
    shortbytes: "'" `shortbytesitem`* "'" | '"' `shortbytesitem`* '"'
@@ -659,7 +659,7 @@ Escape sequences are decoded like in ordinary string literals (except when
 a literal is also marked as a raw string).  After decoding, the grammar
 for the contents of the string is:
 
-.. productionlist::
+.. productionlist:: python-grammar
    f_string: (`literal_char` | "{{" | "}}" | `replacement_field`)*
    replacement_field: "{" `f_expression` ["="] ["!" `conversion`] [":" `format_spec`] "}"
    f_expression: (`conditional_expression` | "*" `or_expr`)
@@ -702,7 +702,7 @@ defaults to the :func:`str` of the expression unless a conversion ``'!r'`` is
 declared.
 
 .. versionadded:: 3.8
-   The equal sign ``'='`` was added in Python 3.8.
+   The equal sign ``'='``.
 
 If a conversion is specified, the result of evaluating the expression
 is converted before formatting.  Conversion ``'!s'`` calls :func:`str` on
@@ -718,7 +718,7 @@ Top-level format specifiers may include nested replacement fields. These nested
 fields may include their own conversion fields and :ref:`format specifiers
 <formatspec>`, but may not include more deeply-nested replacement fields. The
 :ref:`format specifier mini-language <formatspec>` is the same as that used by
-the string .format() method.
+the :meth:`str.format` method.
 
 Formatted string literals may be concatenated, but replacement fields
 cannot be split across literals.
@@ -820,7 +820,7 @@ Integer literals
 
 Integer literals are described by the following lexical definitions:
 
-.. productionlist::
+.. productionlist:: python-grammar
    integer: `decinteger` | `bininteger` | `octinteger` | `hexinteger`
    decinteger: `nonzerodigit` (["_"] `digit`)* | "0"+ (["_"] "0")*
    bininteger: "0" ("b" | "B") (["_"] `bindigit`)+
@@ -864,7 +864,7 @@ Floating point literals
 
 Floating point literals are described by the following lexical definitions:
 
-.. productionlist::
+.. productionlist:: python-grammar
    floatnumber: `pointfloat` | `exponentfloat`
    pointfloat: [`digitpart`] `fraction` | `digitpart` "."
    exponentfloat: (`digitpart` | `pointfloat`) `exponent`
@@ -894,7 +894,7 @@ Imaginary literals
 
 Imaginary literals are described by the following lexical definitions:
 
-.. productionlist::
+.. productionlist:: python-grammar
    imagnumber: (`floatnumber` | `digitpart`) ("j" | "J")
 
 An imaginary literal yields a complex number with a real part of 0.0.  Complex
@@ -961,4 +961,4 @@ occurrence outside string literals and comments is an unconditional error:
 
 .. rubric:: Footnotes
 
-.. [#] http://www.unicode.org/Public/11.0.0/ucd/NameAliases.txt
+.. [#] https://www.unicode.org/Public/11.0.0/ucd/NameAliases.txt

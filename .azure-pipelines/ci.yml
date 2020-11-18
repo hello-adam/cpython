@@ -17,7 +17,9 @@ jobs:
 - job: macOS_Build
   displayName: macOS Build
   dependsOn: Prebuild
-  condition: and(succeeded(), eq(dependencies.Prebuild.outputs['tests.run'], 'true'))
+  #condition: and(succeeded(), eq(dependencies.Prebuild.outputs['tests.run'], 'true'))
+  # bpo-39837: macOS tests on Azure Pipelines are disabled
+  condition: false
 
   pool:
     vmImage: macos-10.14

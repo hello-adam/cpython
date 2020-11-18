@@ -1,4 +1,3 @@
-import os
 import unittest
 
 GLOBAL_VAR = None
@@ -513,6 +512,15 @@ spam()"""
             g()
             self.assertEqual(nonlocal_var, None)
         f()
+
+    def test_named_expression_scope_in_genexp(self):
+        a = 1
+        b = [1, 2, 3, 4]
+        genexp = (c := i + a for i in b)
+
+        self.assertNotIn("c", locals())
+        for idx, elem in enumerate(genexp):
+            self.assertEqual(elem, b[idx] + a)
 
 
 if __name__ == "__main__":

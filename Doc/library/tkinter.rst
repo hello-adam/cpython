@@ -31,7 +31,7 @@ installed, so you can read the Tcl/Tk documentation specific to that version.
    `TKDocs <http://www.tkdocs.com/>`_
       Extensive tutorial plus friendlier widget pages for some of the widgets.
 
-   `Tkinter 8.5 reference: a GUI for Python <https://web.archive.org/web/20190524140835/https://infohost.nmt.edu/tcc/help/pubs/tkinter/web/index.html>`_
+   `Tkinter 8.5 reference: a GUI for Python <https://www.tkdocs.com/shipman/>`_
       On-line reference material.
 
    `Tkinter docs from effbot <http://effbot.org/tkinterbook/>`_
@@ -109,9 +109,6 @@ Or, more often::
 
 Other modules that provide Tk support include:
 
-:mod:`tkinter.scrolledtext`
-   Text widget with a vertical scroll bar built in.
-
 :mod:`tkinter.colorchooser`
    Dialog to let the user choose a color.
 
@@ -126,6 +123,9 @@ Other modules that provide Tk support include:
 
 :mod:`tkinter.messagebox`
    Access to standard Tk dialog boxes.
+
+:mod:`tkinter.scrolledtext`
+   Text widget with a vertical scroll bar built in.
 
 :mod:`tkinter.simpledialog`
    Basic dialogs and convenience functions.
@@ -683,9 +683,10 @@ scrollcommand
    This is almost always the :meth:`!set` method of some scrollbar widget, but can
    be any widget method that takes a single argument.
 
-wrap:
+wrap
    Must be one of: ``"none"``, ``"char"``, or ``"word"``.
 
+.. _Bindings-and-Events:
 
 Bindings and Events
 ^^^^^^^^^^^^^^^^^^^

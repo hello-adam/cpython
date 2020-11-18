@@ -39,6 +39,7 @@ steps:
 
 - script: python.bat -m test.pythoninfo
   displayName: 'Display build info'
+  condition: and(succeeded(), variables['testRunPlatform'])
 
 - powershell: >
     Write-Host (
