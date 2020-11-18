@@ -64,8 +64,8 @@ steps:
 
 - script: |
     cp -v $(Build.BinariesDirectory)\bin\amd64\python3.lib $(Build.ArtifactStagingDirectory)\bin\
-    cp -v $(Build.BinariesDirectory)\bin\amd64\python38.lib $(Build.ArtifactStagingDirectory)\bin\
-    cp -v $(Build.BinariesDirectory)\bin\amd64\python38.dll $(Build.ArtifactStagingDirectory)\bin\
+    cp -v $(Build.BinariesDirectory)\bin\amd64\python39.lib $(Build.ArtifactStagingDirectory)\bin\
+    cp -v $(Build.BinariesDirectory)\bin\amd64\python39.dll $(Build.ArtifactStagingDirectory)\bin\
   displayName: 'Stage build libs for publishing'
 
 - task: PublishBuildArtifacts@1
