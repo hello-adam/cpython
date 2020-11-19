@@ -6,6 +6,7 @@ steps:
       rm -rfv ${{ parameters.buildDir }}/share
       rm -rfv ${{ parameters.buildDir }}/bin/2to3*
       rm -rfv ${{ parameters.buildDir }}/bin/idle3*
+      rm -rfv ${{ parameters.buildDir }}/bin/pip*
       rm -rfv ${{ parameters.buildDir }}/bin/pydoc*
       rm -rfv ${{ parameters.buildDir }}/bin/easy_install*
       rm -rfv ${{ parameters.buildDir }}/lib/python3.9/site-packages/easy_install*
@@ -16,11 +17,13 @@ steps:
       rm -rfv ${{ parameters.buildDir }}/lib/python3.9/idlelib
       rm -rfv ${{ parameters.buildDir }}/lib/python3.9/tkinter
       rm -rfv ${{ parameters.buildDir }}/lib/python3.9/turtle*
+      cp .azure-pipelines/files/pip3 ${{ parameters.buildDir }}/bin/
+      chmod 755 ${{ parameters.buildDir }}/bin/pip3
       find ${{ parameters.buildDir }}/lib/python3.9 -name __pycache__ -type d -prune -exec rm -rfv {} \;
       find ${{ parameters.buildDir }}/lib/python3.9 -name test -type d -prune -exec rm -rfv {} \;
       find ${{ parameters.buildDir }}/lib/python3.9 -name tests -type d -prune -exec rm -rfv {} \;
       export LD_LIBRARY_PATH=${{ parameters.buildDir }}/lib
       find ${{ parameters.buildDir }}/lib/python3.9 -name "*.py" -type f -exec ${{ parameters.buildDir }}/bin/python3 -OO -m compileall -b {} \; -delete
-      find ${{ parameters.buildDir }}/lib/python3.9 -name __pycache__ -type d -prune -exec rm -rfv {} \;
+      find ${{ parameters.buildDir }}/lib/python3.8 -name __pycache__ -type d -prune -exec rm -rfv {} \;
     displayName: 'Clean up installation'
 
