@@ -3,7 +3,8 @@ steps:
   clean: true
   fetchDepth: 5
 
-- script: ./configure --enable-shared --enable-optimizations --with-pymalloc --without-doc-strings --prefix=$(Build.ArtifactStagingDirectory)
+# --enable-optimizations fails with the CentOS build image
+- script: ./configure --enable-shared --with-pymalloc --without-doc-strings --prefix=$(Build.ArtifactStagingDirectory)
   displayName: 'Configure CPython'
 
 - template: ./unix-make-publish.yml
