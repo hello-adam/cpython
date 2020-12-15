@@ -34,6 +34,10 @@ jobs:
   pool:
     vmImage: ubuntu-18.04
 
+  variables:
+  - name: ldflags
+    value: '-Wl,-rpath=\$$ORIGIN/../lib'
+
   steps:
   - template: ./ubuntu-steps.yml
 
@@ -46,6 +50,10 @@ jobs:
   pool:
     vmImage: 'ubuntu-18.04'
   container: helloadam/hobbitscentosbuilder:latest
+
+  variables:
+  - name: ldflags
+    value: '-Wl,-rpath=\$$ORIGIN/../lib'
 
   steps:
     - template: ./centos-steps.yml
