@@ -1,3 +1,7 @@
+variables:
+  - name: ldflags
+    value: '-Wl,-rpath=\$$ORIGIN/../lib' 
+
 steps:
 - checkout: self
   clean: true
