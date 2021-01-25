@@ -14,6 +14,7 @@ steps:
 - template: ./clean-up-build.yml
   parameters:
     buildDir: $(Build.ArtifactStagingDirectory)
+    artifactName: ${{ parameters.artifactName }}
 
 - script: |
     cd $(Build.ArtifactStagingDirectory)
