@@ -28,9 +28,10 @@ steps:
       find ${{ parameters.buildDir }}/lib/python3.9 -name __pycache__ -type d -prune -exec rm -rfv {} \;
     displayName: 'Clean up installation'
 
-  -script: |
+  - script: |
       PY_DYLIB_PATH=`otool -l ${{ parameters.buildDir }}/bin/python3.9 | grep libpython3.9.dylib | awk '{print $2}'`
       install_name_tool -change $PY_DYLIB_PATH @executable_path/../lib/libpython3.9.dylib ${{ parameters.buildDir }}/bin/python3.9
       install_name_tool -change $PY_DYLIB_PATH @executable_path/../lib/libpython3.9.dylib ${{ parameters.buildDir }}/bin/python3.9-config
+      install_name_tool -id "@rpath/libpython3.9.dylib" ${{ parameters.buildDir }}/lib/libpython3.9.dylib
     condition: eq('python_macos_1014', '${{ parameters.artifactName }}')
     displayName: 'macOS-specific path updates'
